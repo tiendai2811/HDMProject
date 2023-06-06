@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/clbglogo.png" type="image/x-icon">
+    <title>Môn học đã xoá</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sideBar.css">
+</head>
+
+<body>
+    {{> header}}
+    <div class="wrapper">
+        {{> sidebarStaff}}
+        <div class="main_content">
+            <div class="container">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a class="mt-4 me-4 btn btn-success" href="/staff/viewCourses">Danh sách môn học</a>
+                        <h1>Danh sách môn học đã xoá</h1>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead class="bg-warning">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Môn học</th>
+                            <th scope="col">Loại</th>
+                            <th scope="col">Mô tả</th>
+                            <th scope="col">Thời gian xoá</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each courses}}
+                        <tr>
+                            <th>{{sum @index}}</th>
+                            <td>{{this.name}}</td>
+                            {{#each ../categories}}
+                            {{#if (compare this._id ../this.idCategory)}}
+                            <td>{{this.name}}</td>
+                            {{/if}}
+                            {{/each}}
+                            <td>{{this.description}}</td>
+                            <td>{{this.dateDeleted}}</td>
+                            <td>
+                                <a class="btn btn-primary btn-restore" href="" data-id="{{this._id}}">Khôi phục</a>
+                                <a class="btn btn-danger" href="" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                    data-id="{{this._id}}">Xoá vĩnh viễn</a>
+                            </td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td colspan="6" class="text-center">Không có môn học nào bị xoá!</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{> footer}}
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Permanently delete Course</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    The course is no longer reinstated. Are you sure you want to delete it permanently?
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-delete-course" type="button" class="btn btn-danger">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="form-delete" method="post"></form>
+    <form class="form-restore" method="post"></form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let courseId;
+            let deleteForm = document.querySelector('.form-delete')
+            let restoreForm = document.querySelector('.form-restore')
+            let btnDeleteCourse = document.querySelector('#btn-delete-course')
+            let deleteModal = document.getElementById('deleteModal')
+            let btnRestore = document.querySelectorAll('.btn-restore')
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                // Button that triggered the modal
+                let button = event.relatedTarget
+                // Extract info from data-bs-* attributes
+                courseId = button.getAttribute('data-id')
+            })
+            btnDeleteCourse.onclick = () => {
+                deleteForm.action = `/staff/viewCourses/${courseId}/force?_method=DELETE`;
+                deleteForm.submit();
+            }
+            Array.from(btnRestore).forEach((btn) => {
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    courseId = e.target.getAttribute('data-id');
+                    restoreForm.action = `/staff/viewCourses/${courseId}/restore?_method=PATCH`;
+                    restoreForm.submit();
+                }
+            })
+        })
+    </script>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
