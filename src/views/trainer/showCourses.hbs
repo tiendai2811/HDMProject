@@ -70,7 +70,7 @@
                             <th scope="col">Tên môn học</th>
                             <th scope="col">Phân loại</th>
                             <th scope="col">Mô tả</th>
-                            <th scope="col">Số sinh viên</th>
+                            <th scope="col">Số học sinh</th>
                             <th scope="col">Lựa chọn</th>
                         </tr>
                     </thead>
@@ -84,7 +84,7 @@
                             <td>{{this.description}}</td>
                             <td>{{this.quantity}}</td>
                             <td>
-                                <a class="btn btn-success" href="/trainer/showalltrainees/{{this.id}}">Xem sinh viên</a>
+                                <a class="btn btn-success" href="/trainer/showalltrainees/{{this.id}}">Xem học sinh</a>
                                 <a class="btn btn-primary" href="/trainer/viewSchedules/{{this.id}}">Xem lịch học</a>
                             </td>
                         </tr>
@@ -102,7 +102,7 @@
                             <td>{{course.description}}</td>
                             <td>{{course.quantity}}</td>
                             <td>
-                                <a href="/trainer/showalltrainees/{{course.id}}">Xem sinh viên</a>
+                                <a href="/trainer/showalltrainees/{{course.id}}">Xem học sinh</a>
                                 <a class="btn btn-primary" href="/trainer/viewSchedules/{{course.id}}">Xem lịch học</a>
                             </td>
                         </tr>

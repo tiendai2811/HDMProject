@@ -15,7 +15,7 @@ body{
     position: absolute;
     top: 30%;
     left: 10%;
-    color: #2d3791;
+    color: #0d166d;
 }
 .text-loginUser{
     top: 30%;
@@ -56,7 +56,7 @@ body{
     position: relative;
 }
 .img-login{
-    background-image: url(../images/bgvnua.jpg);
+    background-image: url(../images/thump2.jpg);
     background-size: cover;
     background-position: center;
     height:100%;

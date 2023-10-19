@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/clbglogo.png" type="image/x-icon">
+    <link rel="icon" href="images/logos1.png" type="image/x-icon">
     <title>Môn học</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -20,7 +20,7 @@
         {{> sidebarStaff}}
         <div class="main_content">
             <div class="container mb-5">
-                <h1 class="text-center">{{course.name}} course</h1>
+                <h1 class="text-center">{{course.name}}</h1>
                 <div class="my-3">
                     <a class="text-decoration-none" href="/staff/viewCourses" style="font-size: 20px">Xem môn học</a>
                 </div>
@@ -32,18 +32,17 @@
                             <p><span>Tên danh mục: </span>{{course.nameCategory}}</p>
                             <p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span>Tên giảng viên: <span class="trainer-name">{{course.nameTrainer}}</span></span>
+                                <span>Tên giáo viên: <span class="trainer-name">{{course.nameTrainer}}</span></span>
                                 <button class="btn btn-danger btn-close-trainer" data-bs-toggle="modal"
                                     data-bs-target="#deleteModalTrainer" data-id="{{course._id}}"
-                                    data-idTrainer="{{course.idTrainer}}" style="margin-right: 130px;">Xoá giảng viên</button>
+                                    data-idTrainer="{{course.idTrainer}}" style="margin-right: 130px;">Xoá giáo viên</button>
                             </div>
                             <a href="/staff/viewCourses/{{course._id}}/viewAddTrainer"
-                                class="btn btn-success btn-addTrainer">Xoá
-                                giảng viên</a>
+                                class="btn btn-success btn-addTrainer">Thêm giáo viên</a>
                             </p>
                             <p>
                             <p>Danh sách sinh viên: </p>
-                            <a href="/staff/viewCourses/{{course._id}}/viewAddTrainee" class="btn btn-success">Thêm sinh viên</a>
+                            <a href="/staff/viewCourses/{{course._id}}/viewAddTrainee" class="btn btn-success">Thêm học sinh</a>
                             </p>
                             <table class="table table-bordered">
                                 <thead>
@@ -71,7 +70,7 @@
                                     </tr>
                                     {{else}}
                                     <tr>
-                                        <td colspan="5" class="text-center">Môn học này không có sinh viên nào</td>
+                                        <td colspan="5" class="text-center">Môn học này không có học sinh nào</td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
